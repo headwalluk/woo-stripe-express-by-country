@@ -189,8 +189,8 @@ Milestone 6.
 - [x] Live-tested allow-list and block-list display gating on classic checkout
 - [x] `phpcs` clean; bump to 1.0.0 (plugin header, `WSEC_VERSION`, `readme.txt`)
 - [x] CHANGELOG 1.0.0 entry; README + `docs/` finalised
-- [ ] Test with no countries configured in each mode (verify the empty-list defaults)
-- [ ] Confirm no fatal when the Stripe plugin is inactive / its filters are absent
+- [x] Test with no countries configured in each mode (empty-list defaults verified in browser)
+- [x] Confirm no fatal when the Stripe plugin is inactive / its filters are absent (verified: classic checkout works, other gateways shown, logs clear)
 - [ ] Tag `v1.0.0` to trigger the release workflow and verify the built zips install
 
 ### Milestone 6: GitHub Self-Update & Release Workflow (1.0.0) ✅

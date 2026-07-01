@@ -189,6 +189,7 @@ Milestone 6.
 - [x] Live-tested allow-list and block-list display gating on classic checkout
 - [x] `phpcs` clean; bump to 1.0.0 (plugin header, `WSEC_VERSION`, `readme.txt`)
 - [x] CHANGELOG 1.0.0 entry; README + `docs/` finalised
+- [x] i18n: strings verified against the wp-translate rules; `.pot` + `.po`/`.mo` built for en_GB, fr_FR, de_DE, es_ES, it_IT, pl_PL, nl_NL
 - [x] Test with no countries configured in each mode (empty-list defaults verified in browser)
 - [x] Confirm no fatal when the Stripe plugin is inactive / its filters are absent (verified: classic checkout works, other gateways shown, logs clear)
 - [x] Tag `v1.0.0`; release workflow green; zip contents verified clean (15 shipping files, dev/docs stripped)

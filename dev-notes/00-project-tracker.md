@@ -2,7 +2,7 @@
 
 **Version:** 1.0.0
 **Last Updated:** 1 July 2026
-**Status:** Release candidate (display-gate-only; server-side block deferred)
+**Status:** 1.0.0 released (display-gate-only; server-side block deferred)
 
 ---
 
@@ -191,7 +191,7 @@ Milestone 6.
 - [x] CHANGELOG 1.0.0 entry; README + `docs/` finalised
 - [x] Test with no countries configured in each mode (empty-list defaults verified in browser)
 - [x] Confirm no fatal when the Stripe plugin is inactive / its filters are absent (verified: classic checkout works, other gateways shown, logs clear)
-- [ ] Tag `v1.0.0` to trigger the release workflow and verify the built zips install
+- [x] Tag `v1.0.0`; release workflow green; zip contents verified clean (15 shipping files, dev/docs stripped)
 
 ### Milestone 6: GitHub Self-Update & Release Workflow (1.0.0) ✅
 
@@ -203,8 +203,9 @@ Adapted from the shared Headwall updater used on other plugins.
 - [x] `UPDATER_GITHUB_REPO` / `UPDATER_CACHE_KEY` / `UPDATER_CACHE_TTL` constants + `WSEC_BASENAME`
 - [x] Instantiated in `Plugin::run()`; requires added to the main file
 - [x] `.github/workflows/release.yml` (builds `{slug}.zip` + versioned zip on `v*.*.*` tag)
-- [x] `.distignore` for the shipped zip
-- [ ] Verify end-to-end by tagging `v1.0.0` and installing the built zip on a test site
+- [x] `.distignore` for the shipped zip (expanded to strip docs / README / dev files)
+- [x] Tagged `v1.0.0`; workflow builds a clean zip (verified contents)
+- [ ] Final: install the built zip on a test site to confirm activation + self-update
 
 ### Milestone 7: Server-side Hard Block (post-1.0.0) 📋
 

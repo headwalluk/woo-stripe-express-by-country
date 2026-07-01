@@ -1,0 +1,101 @@
+# Copyright (C) 2026 Paul Faulkner
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Language: fr_FR\n"
+"Project-Id-Version: Stripe Express Checkout by Country 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-stripe-express-by-country\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-07-01T12:07:32+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: woo-stripe-express-by-country\n"
+
+#. Plugin Name of the plugin
+#: woo-stripe-express-by-country.php
+msgid "Stripe Express Checkout by Country"
+msgstr "Stripe Express Checkout par pays"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: woo-stripe-express-by-country.php
+msgid "https://headwall-hosting.com/"
+msgstr "https://headwall-hosting.com/"
+
+#. Description of the plugin
+#: woo-stripe-express-by-country.php
+msgid "Restricts the WooCommerce Stripe Express Checkout (Apple Pay / Google Pay) to configurable countries, using an allow-list or block-list."
+msgstr "Limite l'utilisation de la fonctionnalité « Stripe Express Checkout » de WooCommerce (Apple Pay / Google Pay) aux pays configurables, à l'aide d'une liste blanche ou d'une liste noire."
+
+#. Author of the plugin
+#: woo-stripe-express-by-country.php
+msgid "Paul Faulkner"
+msgstr "Paul Faulkner"
+
+#: admin-templates/settings-page.php:25
+msgid "Control which customers are offered the Stripe Express Checkout (Apple Pay / Google Pay) based on their country. The customer country is taken from their shipping address, falling back to billing."
+msgstr "Définissez quels clients peuvent bénéficier du paiement express Stripe (Apple Pay / Google Pay) en fonction de leur pays. Le pays du client est déterminé à partir de son adresse de livraison ; à défaut, c'est l'adresse de facturation qui est prise en compte."
+
+#: admin-templates/settings-page.php:35
+msgctxt "restriction mode setting"
+msgid "Mode"
+msgstr "Mode"
+
+#: admin-templates/settings-page.php:43
+msgid "Only show express checkout for the selected countries"
+msgstr "Afficher uniquement le paiement express pour les pays sélectionnés"
+
+#: admin-templates/settings-page.php:51
+msgid "Show express checkout for all customers, except the selected countries"
+msgstr "Afficher le paiement express pour tous les clients, à l'exception des pays sélectionnés"
+
+#: admin-templates/settings-page.php:61
+msgctxt "country list setting"
+msgid "Countries"
+msgstr "Pays"
+
+#: admin-templates/settings-page.php:68
+msgid "The WooCommerce country list is unavailable. Please ensure WooCommerce is active."
+msgstr "La liste des pays de WooCommerce n'est pas disponible. Veuillez vous assurer que WooCommerce est activé."
+
+#: admin-templates/settings-page.php:74
+msgid "Choose countries…"
+msgstr "Sélectionnez des pays…"
+
+#: admin-templates/settings-page.php:88
+msgid "Search for and select one or more countries. The selection is interpreted according to the mode above."
+msgstr "Recherchez et sélectionnez un ou plusieurs pays. La sélection est interprétée selon le mode indiqué ci-dessus."
+
+#: admin-templates/settings-page.php:99
+msgctxt "hard block setting"
+msgid "Server-side block"
+msgstr "Bloc côté serveur"
+
+#: admin-templates/settings-page.php:106
+msgid "Also reject disallowed express-checkout orders on the server"
+msgstr "Refuser également sur le serveur les commandes passées via le paiement express qui ont été rejetées"
+
+#: admin-templates/settings-page.php:111
+msgid "Optional. The display gate above already hides the buttons. Enable this only if you need to guarantee that a disallowed order can never complete via express checkout — note it can reject a wallet payment after the customer has started it, because their wallet country may differ from the country shown."
+msgstr "Facultatif. La barrière d'affichage ci-dessus masque déjà les boutons. N'activez cette option que si vous devez vous assurer qu'une commande non autorisée ne puisse en aucun cas être finalisée via le paiement express — notez que cela peut entraîner le rejet d'un paiement par portefeuille électronique après que le client a lancé la procédure, car le pays associé à son portefeuille peut différer du pays affiché."
+
+#: admin-templates/settings-page.php:119
+msgid "Save Changes"
+msgstr "Enregistrer les modifications"
+
+#: includes/class-plugin.php:94
+#: includes/class-plugin.php:95
+msgid "Stripe Express by Country"
+msgstr "Stripe Express par pays"
+
+#: includes/class-restrictions.php:153
+msgid "Express Checkout is not available for your country. Please complete your purchase using the standard checkout."
+msgstr "Le paiement express n'est pas disponible dans votre pays. Veuillez finaliser votre achat via la procédure de paiement standard."
+
+#: includes/class-settings.php:128
+msgid "You are not allowed to manage these settings."
+msgstr "Vous n'êtes pas autorisé à modifier ces paramètres."

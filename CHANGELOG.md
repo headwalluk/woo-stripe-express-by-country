@@ -20,3 +20,7 @@ project adheres to [Semantic Versioning](https://semver.org/).
 - Optional server-side hard block (`OPT_HARD_BLOCK`, default off): when enabled,
   rejects a disallowed express-checkout order at validation for both classic and
   block / Store API checkout flows (Milestone 4).
+- `wsec_is_customer_allowed` filter so developers can override the allow/deny
+  decision with custom logic.
+- Documentation: `README.md` with badges, `docs/settings.md`, `docs/hooks.md`,
+  and a `LICENSE` file (GPL-2.0).

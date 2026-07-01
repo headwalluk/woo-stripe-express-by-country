@@ -150,8 +150,16 @@ type: brief description
 
 Types: `feat:` `fix:` `refactor:` `chore:` `docs:` `style:` `test:`
 
+## Extensibility
+
+The plugin exposes one filter, `wsec_is_customer_allowed` (in
+`Restrictions::is_customer_allowed()`), which filters the final allow/deny
+decision — `($allowed, $country)`. It drives the display gate and, when enabled,
+the server-side block. See `docs/hooks.md`.
+
 ## Reference Files
 
+- `README.md`, `docs/settings.md`, `docs/hooks.md` — user- and developer-facing docs.
 - `dev-notes/00-project-tracker.md` — Milestones, decisions, and roadmap.
 - Prototype (US-only theme snippet this productionises):
   `acth.headwall.tech/web/wp-content/themes/activehands/express-checkout-restrictions.php`

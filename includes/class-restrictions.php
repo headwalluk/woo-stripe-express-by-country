@@ -87,15 +87,26 @@ class Restrictions {
 	 */
 	public function is_customer_allowed(): bool {
 		if ( ! function_exists( 'WC' ) || ! WC()->customer ) {
-			return $this->is_country_allowed( '' );
+			$country = '';
+		} else {
+			$country = $this->resolve_country(
+				(string) WC()->customer->get_shipping_country(),
+				(string) WC()->customer->get_billing_country()
+			);
 		}
 
-		$country = $this->resolve_country(
-			(string) WC()->customer->get_shipping_country(),
-			(string) WC()->customer->get_billing_country()
-		);
+		$allowed = $this->is_country_allowed( $country );
 
-		return $this->is_country_allowed( $country );
+		/**
+		 * Filters whether the current customer may use express checkout.
+		 *
+		 * Return true to allow, false to deny. Applies to the display gate and, when
+		 * enabled, is also the basis for the server-side hard block.
+		 *
+		 * @param bool   $allowed Whether express checkout is allowed for the customer.
+		 * @param string $country The resolved ISO 3166-1 alpha-2 country code ('' if unknown).
+		 */
+		return (bool) apply_filters( 'wsec_is_customer_allowed', $allowed, $country );
 	}
 
 	/**

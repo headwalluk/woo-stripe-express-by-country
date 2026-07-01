@@ -3,7 +3,7 @@
  * Plugin Name:          Stripe Express Checkout by Country
  * Plugin URI:           https://headwall-hosting.com/
  * Description:          Restricts the WooCommerce Stripe Express Checkout (Apple Pay / Google Pay) to configurable countries, using an allow-list or block-list.
- * Version:              0.1.0
+ * Version:              1.0.0
  * Requires at least:    6.0
  * Requires PHP:         8.0
  * Requires Plugins:     woocommerce, woocommerce-gateway-stripe
@@ -22,11 +22,12 @@
 defined( 'ABSPATH' ) || die();
 
 const WSEC_NAME    = 'woo-stripe-express-by-country';
-const WSEC_VERSION = '0.1.0';
+const WSEC_VERSION = '1.0.0';
 
 define( 'WSEC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WSEC_URL', plugin_dir_url( __FILE__ ) );
 define( 'WSEC_FILE', __FILE__ );
+define( 'WSEC_BASENAME', plugin_basename( __FILE__ ) );
 define( 'WSEC_ADMIN_TEMPLATES_DIR', trailingslashit( WSEC_DIR . 'admin-templates' ) );
 
 // Load constants and plugin classes.
@@ -34,6 +35,7 @@ require_once WSEC_DIR . 'constants.php';
 require_once WSEC_DIR . 'functions-private.php';
 require_once WSEC_DIR . 'includes/class-settings.php';
 require_once WSEC_DIR . 'includes/class-restrictions.php';
+require_once WSEC_DIR . 'includes/class-github-updater.php';
 require_once WSEC_DIR . 'includes/class-plugin.php';
 
 /**

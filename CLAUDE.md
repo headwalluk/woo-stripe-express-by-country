@@ -62,6 +62,13 @@ global constant). The launched instance is stored in the global `$wsec_plugin`.
   the shared country-decision helpers plus both enforcement layers (below). It
   reads its configuration through the `get_settings_controller()` helper, **not**
   constructor injection.
+- **`Github_Updater`** (`includes/class-github-updater.php`) — Self-updates from
+  GitHub Releases. Instantiated in `Plugin::run()`; registers its own hooks into
+  the WP plugin-update system. Config via the `UPDATER_*` constants; toggle with
+  the `wsec_updater_enabled` filter. Paired with `.github/workflows/release.yml`
+  (builds the release zips on a `v*.*.*` tag) and `.distignore` (what to exclude
+  from the shipped zip). Adapted from the shared Headwall updater — keep changes
+  minimal so it stays in sync across plugins.
 
 ### Global Accessors
 
@@ -81,11 +88,15 @@ reach the plugin and its components without constructor injection:
    - `wc_stripe_show_payment_request_on_checkout`
    - `wc_stripe_hide_payment_request_on_product_page` (inverted: `true` = hide)
 
-2. **Server-side hard guard (optional, default OFF)** — rejects the order at
-   checkout if it was placed via express checkout from a disallowed country, even
-   if the customer resolved a different address inside the wallet sheet. Gated
-   behind the `OPT_HARD_BLOCK` setting and only registered in `Plugin::run()` when
-   enabled. The display gate is the primary mechanism; this is opt-in because the
+2. **Server-side hard guard (optional; deferred, currently OFF)** — rejects the
+   order at checkout if it was placed via express checkout from a disallowed
+   country, even if the customer resolved a different address inside the wallet
+   sheet. The whole feature is gated behind the `IS_SERVER_HARDBLOCK_AVAILABLE`
+   constant in `constants.php` (currently `false`) — while false, the setting is
+   hidden, not saved, and the guards are never registered, so the plugin ships
+   display-gate-only. When available, it is further gated behind the
+   `OPT_HARD_BLOCK` setting and only registered in `Plugin::run()` when enabled.
+   The display gate is the primary mechanism; this is opt-in because the
    country signals (IP geo / typed address / wallet address) routinely disagree,
    so an always-on block can reject a wallet payment mid-flow. Covers both flows:
    - Classic checkout — `woocommerce_after_checkout_validation`

@@ -1,0 +1,12 @@
+# Files and directories excluded from the distributed release zip.
+.git
+.github
+.gitignore
+.distignore
+.claude
+dev-notes
+phpcs.xml
+CLAUDE.md
+node_modules
+vendor
+build

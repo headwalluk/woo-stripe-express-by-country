@@ -54,10 +54,3 @@ the plugin attaches its logic to them.
 | `wc_stripe_show_payment_request_on_cart` | Show/hide express checkout on the cart. |
 | `wc_stripe_show_payment_request_on_checkout` | Show/hide express checkout on the checkout. |
 | `wc_stripe_hide_payment_request_on_product_page` | Show/hide express checkout on product pages (inverted: `true` hides). |
-
-### Server-side hard block (WooCommerce, only when enabled)
-
-| Hook | Purpose |
-|------|---------|
-| `woocommerce_after_checkout_validation` | Reject a disallowed express order in the classic checkout flow. |
-| `woocommerce_rest_checkout_process_payment_with_context` | Reject a disallowed express order in the block / Store API flow (priority 50). |

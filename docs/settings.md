@@ -24,24 +24,6 @@ WooCommerce knows about. The meaning of the selection depends on the mode above.
 | Allow-list | Express checkout is hidden from **everyone** (nothing is allowed). |
 | Block-list | Express checkout is shown to **everyone** (nothing is blocked). |
 
-## Server-side block (optional, default off)
-
-> *Also reject disallowed express-checkout orders on the server*
-
-When **off** (default), the plugin only hides the express-checkout buttons — the
-"display gate". This is the recommended setting for most stores.
-
-When **on**, the plugin *additionally* rejects a disallowed order during checkout
-validation (both classic and block / Store API flows), even if the buttons were
-shown.
-
-**Why it is off by default:** the customer's country is a fuzzy signal. Their IP
-geolocation, the address they type, and the address their Apple/Google Pay wallet
-resolves *inside the payment sheet* can all differ. With the hard block on, a
-customer can be shown the button, tap it, and then have the payment rejected —
-which hurts conversion. Enable it only when you need a strict guarantee that a
-disallowed order can never complete via express checkout.
-
 ## How the customer's country is determined
 
 The country is taken from the customer's **shipping** address, falling back to
@@ -56,7 +38,13 @@ can claim VAT exemption (which express checkout cannot represent).
 
 - **Mode:** block-list
 - **Countries:** United Kingdom (`GB`), Jersey (`JE`), Guernsey (`GG`)
-- **Server-side block:** off
 
 Those customers get express hidden and flow through the standard checkout;
 everyone else keeps express checkout.
+
+## Roadmap
+
+The display gate hides the buttons but does not, by itself, prevent a determined
+customer from completing an express payment whose wallet country differs from
+what was shown. A stricter, optional **server-side block** is planned for a
+future release; it is present in the codebase but disabled for now.

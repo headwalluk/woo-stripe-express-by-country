@@ -193,8 +193,11 @@ class Settings {
 
 		update_option( OPT_COUNTRIES, $countries );
 
-		// Server-side hard block (checkbox: present = enabled).
-		update_option( OPT_HARD_BLOCK, isset( $_POST[ OPT_HARD_BLOCK ] ) ? '1' : '' );
+		// Server-side hard block (checkbox: present = enabled). Deferred to a
+		// post-1.0.0 release; only saved when the feature is available.
+		if ( IS_SERVER_HARDBLOCK_AVAILABLE ) {
+			update_option( OPT_HARD_BLOCK, isset( $_POST[ OPT_HARD_BLOCK ] ) ? '1' : '' );
+		}
 
 		// phpcs:enable WordPress.Security.NonceVerification.Missing
 	}

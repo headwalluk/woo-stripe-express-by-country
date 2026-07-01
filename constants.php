@@ -19,6 +19,20 @@ defined( 'ABSPATH' ) || die();
 const SETTINGS_PAGE_SLUG = 'woo-stripe-express-by-country';
 
 // ============================================================================
+// Feature Flags
+// ============================================================================
+
+/**
+ * Whether the server-side hard block feature is available.
+ *
+ * Deferred to a post-1.0.0 release. While false, the hard-block setting is hidden
+ * from the settings page, its value is not saved, and the checkout guards are
+ * never registered — so the plugin ships as display-gate-only. Flip to true to
+ * re-enable the feature (see dev-notes/00-project-tracker.md).
+ */
+const IS_SERVER_HARDBLOCK_AVAILABLE = false;
+
+// ============================================================================
 // Restriction Modes
 // ============================================================================
 
@@ -67,6 +81,25 @@ const OPT_HARD_BLOCK = 'wsec_hard_block';
  * everyone until the operator configures it — a safe, fail-closed default.
  */
 const DEF_MODE = MODE_ALLOW;
+
+// ============================================================================
+// GitHub Updater
+// ============================================================================
+
+/**
+ * The GitHub repository (owner/name) that serves plugin release zips.
+ */
+const UPDATER_GITHUB_REPO = 'headwalluk/woo-stripe-express-by-country';
+
+/**
+ * Transient key for the cached latest-release lookup.
+ */
+const UPDATER_CACHE_KEY = 'wsec_updater_latest_release';
+
+/**
+ * How long to cache the latest-release lookup, in seconds.
+ */
+const UPDATER_CACHE_TTL = 6 * HOUR_IN_SECONDS;
 
 // ============================================================================
 // Country Resolution

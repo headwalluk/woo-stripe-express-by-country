@@ -1,8 +1,8 @@
 # Stripe Express by Country — Project Tracker
 
-**Version:** 0.1.0 (pre-release)
+**Version:** 1.0.0
 **Last Updated:** 1 July 2026
-**Status:** Planning
+**Status:** Release candidate (display-gate-only; server-side block deferred)
 
 ---
 
@@ -163,11 +163,15 @@ is_country_allowed(country):
 - [x] Fail-closed when country unknown (allow-list mode); permissive for unknown in block-list mode
 - [x] Run `phpcs` — zero violations (7/7 files clean)
 
-### Milestone 4: Enforcement — Layer 2 (Optional Server-side Hard Guard) ✅
+### Milestone 4: Enforcement — Layer 2 (Optional Server-side Hard Guard) ⏸️
 
-**Status:** Complete (pending review) · **Priority:** High
+**Status:** Built, but DEFERRED to post-1.0.0 · **Priority:** High
 
-Revised to be **opt-in, default OFF** — see Decision 8.
+Revised to be **opt-in, default OFF** — see Decision 8. Then, to make 1.0.0
+immediately shippable, the whole feature was gated behind the
+`IS_SERVER_HARDBLOCK_AVAILABLE` constant (currently `false`) so it is invisible
+and inert in 1.0.0. The code below is complete; re-enabling is tracked in
+Milestone 6.
 
 - [x] `OPT_HARD_BLOCK` option + `Settings::is_hard_block_enabled()` getter + save handling
 - [x] Settings page checkbox: "Also reject disallowed express-checkout orders on the server" (with a description explaining the wallet-country caveat)
@@ -178,17 +182,41 @@ Revised to be **opt-in, default OFF** — see Decision 8.
 - [x] Translatable customer-facing blocked message
 - [x] Run `phpcs` — zero violations (7/7 files clean)
 
-### Milestone 5: Testing & Release Prep 📋
+### Milestone 5: Testing & Release Prep (1.0.0) 🚧
 
-**Status:** Not Started · **Priority:** Medium
+**Status:** In Progress · **Priority:** Medium
 
-- [ ] Test allow-list mode: listed country sees buttons, others don't (cart/checkout/product)
-- [ ] Test block-list mode: listed country blocked, others see buttons
-- [ ] Test wallet-sheet country swap is caught by Layer 2 (classic + block checkout)
-- [ ] Test with no countries configured in each mode (define & verify the sensible default)
-- [ ] Verify buttons still fully functional for allowed customers
-- [ ] Confirm no fatal when Stripe plugin inactive / filters absent
-- [ ] `phpcs` clean, bump to 1.0.0, changelog
+- [x] Live-tested allow-list and block-list display gating on classic checkout
+- [x] `phpcs` clean; bump to 1.0.0 (plugin header, `WSEC_VERSION`, `readme.txt`)
+- [x] CHANGELOG 1.0.0 entry; README + `docs/` finalised
+- [ ] Test with no countries configured in each mode (verify the empty-list defaults)
+- [ ] Confirm no fatal when the Stripe plugin is inactive / its filters are absent
+- [ ] Tag `v1.0.0` to trigger the release workflow and verify the built zips install
+
+### Milestone 6: GitHub Self-Update & Release Workflow (1.0.0) ✅
+
+**Status:** Complete (pending release verification) · **Priority:** Medium
+
+Adapted from the shared Headwall updater used on other plugins.
+
+- [x] `includes/class-github-updater.php` (namespace, constants, `wsec_updater_enabled` filter)
+- [x] `UPDATER_GITHUB_REPO` / `UPDATER_CACHE_KEY` / `UPDATER_CACHE_TTL` constants + `WSEC_BASENAME`
+- [x] Instantiated in `Plugin::run()`; requires added to the main file
+- [x] `.github/workflows/release.yml` (builds `{slug}.zip` + versioned zip on `v*.*.*` tag)
+- [x] `.distignore` for the shipped zip
+- [ ] Verify end-to-end by tagging `v1.0.0` and installing the built zip on a test site
+
+### Milestone 7: Server-side Hard Block (post-1.0.0) 📋
+
+**Status:** Not Started · **Priority:** Low
+
+Re-enable the Layer 2 feature built in Milestone 4.
+
+- [ ] Flip `IS_SERVER_HARDBLOCK_AVAILABLE` to `true`
+- [ ] Re-verify the settings checkbox saves and the guards register when enabled
+- [ ] Test the wallet-sheet country swap is caught on classic + block checkout
+- [ ] Restore the server-side sections in `docs/settings.md` and `docs/hooks.md`
+- [ ] `phpcs` clean; changelog; version bump
 
 ---
 

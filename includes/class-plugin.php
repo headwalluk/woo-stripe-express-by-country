@@ -28,6 +28,10 @@ class Plugin {
 	public function run(): void {
 		$this->settings = new Settings();
 
+		// Self-updates from GitHub Releases. The updater registers its own hooks
+		// into the WordPress plugin-update system from its constructor.
+		$this->github_updater = new Github_Updater();
+
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
@@ -42,9 +46,10 @@ class Plugin {
 
 		// Layer 2 — optional server-side hard block: reject a disallowed express
 		// order at checkout, covering the case where the customer's wallet country
-		// differs from the country shown. Off by default; only registered when the
-		// operator has explicitly enabled it.
-		if ( $this->settings->is_hard_block_enabled() ) {
+		// differs from the country shown. Deferred to a post-1.0.0 release (gated
+		// behind IS_SERVER_HARDBLOCK_AVAILABLE); when available, only registered
+		// when the operator has explicitly enabled it.
+		if ( IS_SERVER_HARDBLOCK_AVAILABLE && $this->settings->is_hard_block_enabled() ) {
 			add_action( 'woocommerce_after_checkout_validation', array( $restrictions, 'guard_classic_checkout' ), 10, 2 );
 			add_action( 'woocommerce_rest_checkout_process_payment_with_context', array( $restrictions, 'guard_store_api_checkout' ), 50 );
 		}
@@ -126,6 +131,13 @@ class Plugin {
 			dirname( plugin_basename( WSEC_FILE ) ) . '/languages'
 		);
 	}
+
+	/**
+	 * GitHub self-updater.
+	 *
+	 * @var Github_Updater
+	 */
+	private Github_Updater $github_updater;
 
 	/**
 	 * Settings controller.

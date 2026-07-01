@@ -14,10 +14,9 @@ namespace Woo_Stripe_Express_By_Country;
 
 defined( 'ABSPATH' ) || die();
 
-$wsec_mode       = $settings->get_mode();
-$wsec_selected   = $settings->get_countries();
-$wsec_countries  = $settings->get_all_countries();
-$wsec_hard_block = $settings->is_hard_block_enabled();
+$wsec_mode      = $settings->get_mode();
+$wsec_selected  = $settings->get_countries();
+$wsec_countries = $settings->get_all_countries();
 
 printf( '<div class="wrap"><h1>%s</h1>', esc_html( get_admin_page_title() ) );
 
@@ -92,24 +91,28 @@ if ( empty( $wsec_countries ) ) {
 
 echo '</fieldset></td></tr>';
 
-// Server-side hard block.
-echo '<tr><th scope="row">';
-printf( '<span>%s</span>', esc_html_x( 'Server-side block', 'hard block setting', 'woo-stripe-express-by-country' ) );
-echo '</th><td><fieldset>';
+// Server-side hard block (deferred to a post-1.0.0 release; see constants.php).
+if ( IS_SERVER_HARDBLOCK_AVAILABLE ) {
+	$wsec_hard_block = $settings->is_hard_block_enabled();
 
-printf(
-	'<label for="%1$s"><input type="checkbox" name="%1$s" id="%1$s" value="1" %2$s /> %3$s</label>',
-	esc_attr( OPT_HARD_BLOCK ),
-	checked( $wsec_hard_block, true, false ),
-	esc_html__( 'Also reject disallowed express-checkout orders on the server', 'woo-stripe-express-by-country' )
-);
+	echo '<tr><th scope="row">';
+	printf( '<span>%s</span>', esc_html_x( 'Server-side block', 'hard block setting', 'woo-stripe-express-by-country' ) );
+	echo '</th><td><fieldset>';
 
-printf(
-	'<p class="description">%s</p>',
-	esc_html__( 'Optional. The display gate above already hides the buttons. Enable this only if you need to guarantee that a disallowed order can never complete via express checkout — note it can reject a wallet payment after the customer has started it, because their wallet country may differ from the country shown.', 'woo-stripe-express-by-country' )
-);
+	printf(
+		'<label for="%1$s"><input type="checkbox" name="%1$s" id="%1$s" value="1" %2$s /> %3$s</label>',
+		esc_attr( OPT_HARD_BLOCK ),
+		checked( $wsec_hard_block, true, false ),
+		esc_html__( 'Also reject disallowed express-checkout orders on the server', 'woo-stripe-express-by-country' )
+	);
 
-echo '</fieldset></td></tr>';
+	printf(
+		'<p class="description">%s</p>',
+		esc_html__( 'Optional. The display gate above already hides the buttons. Enable this only if you need to guarantee that a disallowed order can never complete via express checkout — note it can reject a wallet payment after the customer has started it, because their wallet country may differ from the country shown.', 'woo-stripe-express-by-country' )
+	);
+
+	echo '</fieldset></td></tr>';
+}
 
 echo '</table>';
 
